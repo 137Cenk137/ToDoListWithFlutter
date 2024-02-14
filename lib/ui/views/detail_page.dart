@@ -32,11 +32,14 @@ class _DetailPageState extends State<DetailPage> {
             TextField(controller: tfTitle,decoration: InputDecoration(
                 labelText: tfTitle.text.isEmpty ? "" : "${widget.note.title}"
           )),
-            TextField(controller: tfContent,decoration: InputDecoration(
-                labelText: tfContent.text.isEmpty ? "" : "${widget.note.content}"
-            )),
+            Container(width: 200,height: 400,
+              child: TextField(controller: tfContent,decoration: InputDecoration(
+                  labelText: tfContent.text.isEmpty ? "" : "${widget.note.content}"
+              )),
+            ),
             ElevatedButton(onPressed: (){
               //Update button
+
             }, child: const Text("Update"))
 
           ],

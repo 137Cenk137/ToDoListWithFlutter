@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list/data/entity/note.dart';
+import 'package:todo_list/ui/cubit/detail_page_cubit.dart';
 import 'package:todo_list/ui/cubit/main_page_cubit.dart';
+import 'package:todo_list/ui/views/detail_page.dart';
 import 'package:todo_list/ui/views/register_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -12,6 +14,12 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<MainPageCubit>().getAllNotes();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +36,9 @@ class _MainPageState extends State<MainPage> {
                 return GestureDetector(
                   onDoubleTap: (){
                     //detay page gecis
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>DetailPage(note: note))).then((value) {
+                      context.read<MainPageCubit>().getAllNotes();
+                    });
                   },
                   onLongPress: (){
                     // delete veri
