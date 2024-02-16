@@ -42,6 +42,9 @@ class _MainPageState extends State<MainPage> {
                   },
                   onLongPress: (){
                     // delete veri
+                    context.read<MainPageCubit>().deleteNote(note.letter_id).then((value) {
+                      context.read<MainPageCubit>().getAllNotes();
+                    });
                   },
                   child: Card(
 
@@ -63,7 +66,7 @@ class _MainPageState extends State<MainPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage())).then((value) {
-            print("Anasayfaya dönüldü");
+            context.read<MainPageCubit>().getAllNotes();
           });
         } ,
         child: Icon(Icons.add),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_list/ui/cubit/detail_page_cubit.dart';
 
 import '../../data/entity/note.dart';
 
@@ -33,12 +35,15 @@ class _DetailPageState extends State<DetailPage> {
                 labelText: tfTitle.text.isEmpty ? "" : "${widget.note.title}"
           )),
             Container(width: 200,height: 400,
-              child: TextField(controller: tfContent,decoration: InputDecoration(
+              child: TextField(controller: tfContent,
+                  maxLines: 10,
+                  decoration: InputDecoration(
                   labelText: tfContent.text.isEmpty ? "" : "${widget.note.content}"
               )),
             ),
             ElevatedButton(onPressed: (){
               //Update button
+              context.read<DetailPageCubit>().updateNote(widget.note.letter_id, tfTitle.text, tfContent.text);
 
             }, child: const Text("Update"))
 

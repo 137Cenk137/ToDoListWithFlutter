@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_list/ui/cubit/register_cubit.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -30,6 +32,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){
         // Kayit
+        context.read<RegisterCubit>().addNote(tfTitle.text, tfContent.text);
       },
       child: Icon(Icons.add_task),),
     );

@@ -12,6 +12,11 @@ class MainPageCubit extends Cubit<List<Note>>{
 
     var liste = await nrepo.getAllNotes();
     emit(liste);
+    }
+  Future<void> deleteNote(int letter_id) async{
+
+    await nrepo.deleteNote(letter_id);
+
   }
 
 

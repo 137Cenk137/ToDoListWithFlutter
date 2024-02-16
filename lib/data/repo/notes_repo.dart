@@ -33,4 +33,11 @@ class NotesRepository{
     bilgiler["content"] = content;
     await db.update("notes", bilgiler,where: "letter_id = ?",whereArgs: [letter_id]);
   }
+  Future<void> deleteNote(int letter_id) async{
+
+    var db = await VeritabaniYardimcisi.veritabaniErisim();
+
+    await db.delete("notes",where: "letter_id = ?",whereArgs: [letter_id]);
+  }
+
 }
