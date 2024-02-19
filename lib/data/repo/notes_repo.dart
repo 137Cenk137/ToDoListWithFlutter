@@ -40,4 +40,14 @@ class NotesRepository{
     await db.delete("notes",where: "letter_id = ?",whereArgs: [letter_id]);
   }
 
+  Future<List<Note>> GetSearchByTitle(String veri) async{
+    var db = await VeritabaniYardimcisi.veritabaniErisim();
+    List<Map<String,dynamic>> maps = await db.rawQuery("SELECT *  FROM notes WHERE title like '%$veri%' ");
+    return List.generate(maps.length, (index){
+      var note = maps[index];
+      return Note(letter_id: note["letter_id"], title: note["title"], content: note["content"]);
+    });
+
+  }
+
 }

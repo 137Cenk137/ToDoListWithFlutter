@@ -28,26 +28,39 @@ class _DetailPageState extends State<DetailPage> {
       appBar: AppBar(
         title: Text("Note"),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            TextField(controller: tfTitle,decoration: InputDecoration(
-                labelText: tfTitle.text.isEmpty ? "" : "${widget.note.title}"
-          )),
-            Container(width: 200,height: 400,
-              child: TextField(controller: tfContent,
-                  maxLines: 10,
-                  decoration: InputDecoration(
-                  labelText: tfContent.text.isEmpty ? "" : "${widget.note.content}"
+
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+
+          child: SingleChildScrollView(
+            child: Column(
+
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                TextField(controller: tfTitle,
+                    decoration:const  InputDecoration(
+                        border: InputBorder.none
+                    //labelText: "${widget.note.title}"
               )),
+            
+                TextField(controller: tfContent,
+                      maxLines: null,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none
+                      //labelText: "${widget.note.content}"
+                  ),
+                ),
+                
+                ElevatedButton(onPressed: (){
+                  //Update button
+                  context.read<DetailPageCubit>().updateNote(widget.note.letter_id, tfTitle.text, tfContent.text);
+            
+                }, child: const Text("Update"))
+            
+              ],
             ),
-            ElevatedButton(onPressed: (){
-              //Update button
-              context.read<DetailPageCubit>().updateNote(widget.note.letter_id, tfTitle.text, tfContent.text);
-
-            }, child: const Text("Update"))
-
-          ],
+          ),
         ),
       ),
     );

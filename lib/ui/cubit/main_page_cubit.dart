@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list/data/entity/note.dart';
 import 'package:todo_list/data/repo/notes_repo.dart';
@@ -17,6 +19,11 @@ class MainPageCubit extends Cubit<List<Note>>{
 
     await nrepo.deleteNote(letter_id);
 
+  }
+
+  Future<void> GetSearchByTitle(String veri) async{
+    var liste = await nrepo.GetSearchByTitle(veri);
+    emit(liste);
   }
 
 

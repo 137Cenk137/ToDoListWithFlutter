@@ -21,13 +21,21 @@ class _RegisterPageState extends State<RegisterPage> {
 
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TextField(controller: tfTitle,decoration: InputDecoration(hintText: "Title"),),
-            TextField(controller: tfContent,decoration: InputDecoration(hintText: "Content"),),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0,bottom: 8.0),
+                child: TextField(controller: tfTitle,decoration: const InputDecoration(hintText: "Title",border: InputBorder.none),),
+              ),
+              TextField(
+                controller: tfContent,decoration:const  InputDecoration(hintText: "Content",border: InputBorder.none),
+              maxLines: null,),
 
-          ],
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){

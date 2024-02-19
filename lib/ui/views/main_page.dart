@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:todo_list/data/entity/note.dart';
-import 'package:todo_list/ui/cubit/detail_page_cubit.dart';
+
+
 import 'package:todo_list/ui/cubit/main_page_cubit.dart';
 import 'package:todo_list/ui/views/detail_page.dart';
 import 'package:todo_list/ui/views/register_page.dart';
@@ -14,6 +15,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  
+  bool aramaYapiliyormu = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -24,7 +27,23 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Notes",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),),
+        actions: [
+          aramaYapiliyormu ? IconButton(onPressed: (){
+            setState(() {
+              aramaYapiliyormu = false;
+            });
+          }, icon: Icon(Icons.search)):
+              IconButton(onPressed: (){
+                setState(() {
+                  aramaYapiliyormu = true;
+                });
+              }, icon: Icon(Icons.cancel))
+        ],
+        title: aramaYapiliyormu ? const Text("Notes",style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),) :
+            TextField(decoration: InputDecoration(hintText: "Ara"),onChanged: (sonuc){
+                // arama sonu
+              context.read<MainPageCubit>().GetSearchByTitle(sonuc);
+            },)
       ),
     body:BlocBuilder<MainPageCubit,List<Note>>(
       builder: (context,notes){
@@ -46,13 +65,22 @@ class _MainPageState extends State<MainPage> {
                       context.read<MainPageCubit>().getAllNotes();
                     });
                   },
-                  child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 12.0,left: 12.0,top: 4),
+                    child: Card(
 
-                    child: Column(
-                      children: [
-                        Text("${note.title}",style: const TextStyle(fontWeight: FontWeight.bold),),
-                        Text("${note.content}",maxLines: 2,)
-                      ],
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Text("${note.title}",style: const TextStyle(fontWeight: FontWeight.bold),),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text("${note.content}",maxLines: 2,),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 );
