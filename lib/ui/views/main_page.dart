@@ -26,7 +26,9 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey.shade500,
       appBar: AppBar(
+        backgroundColor: Colors.grey.shade500,
         actions: [
           aramaYapiliyormu ? IconButton(onPressed: (){
             setState(() {
@@ -68,7 +70,7 @@ class _MainPageState extends State<MainPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(right: 12.0,left: 12.0,top: 4),
                     child: Card(
-
+                      color: Colors.white.withOpacity(0.75),
                       child: Column(
                         children: [
                           Padding(
